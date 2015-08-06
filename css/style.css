@@ -1,0 +1,313 @@
+body {
+    font-family: DIN, monospace, sans-serif;
+    overflow: hidden;
+}
+.background {
+    position: fixed;
+    z-index: -99999;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/flashgrande.jpg');
+    background-size: cover;
+    -webkit-background-size: cover;
+    opacity: 0.2;
+}
+
+.splashscreen {
+    cursor: pointer;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 90;
+    box-sizing: border-box;
+    padding-top: 15px;
+    transition: opacity 1s ease-in;
+    overflow: hidden;
+    opacity: 1;
+}
+.splashscreen img {
+    display: block;
+    width: 40%;
+    margin: 10px auto;
+}
+.splashscreen h2 {
+    text-align: center;
+    font-size: 48px;
+    margin-top: 0;
+    transition: all 2s;
+    /*font-weight: bold;*/
+}
+.sidebar {
+    position: fixed;
+    width: 200px;
+    margin-left: 5%;
+    padding-top: 80px;
+    top: 0;
+    height: 100%;
+    border-right: 1px dotted #333;
+}
+
+.sidebar h1 {
+    font-size: 22px;
+    font-weight: bolder;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+.main-nav {
+}
+.main-nav ul li a {
+    color: #111;
+    text-decoration: none;
+    display: block;
+    padding: 15px 0px;
+    padding-left: 5px;
+}
+.main-nav ul li a:hover {
+    background-color: #f0f0f0;
+}
+
+.content {
+    width: calc(90% - 200px);
+    margin: 0 2.5%;
+    float: right;
+}
+
+.work {
+    margin: 0px 5px;
+    height: 500px;
+    position: relative;
+    padding: 100px 0px;
+}
+.inner-work {
+    padding: 0 150px;
+    float: left;
+}
+.work .work-img {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+}
+.work img {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+}
+.work-info {
+    position: absolute;
+    top: 125px;
+    right: 0;
+    text-align: right;
+    background-color: rgba(126,255,211,0.2);
+    padding: 5px 10px;
+}
+.work-info h2 {
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+.work-info p {
+    font-size: 13px;
+    line-height: 22px;
+}
+.work-info p:first-child {
+    font-size: 14px;
+}
+.frame {
+    padding: 0;
+    width: 100%;
+    position: relative;
+    height: 760px;
+    box-sizing: border-box;
+}
+.frame .slidee {
+    margin: 0;
+    padding: 1em;
+}
+
+.frame.h-frame {
+    padding: 0;
+    width: 100%;
+    position: relative;
+    height: 700px;
+    box-sizing: border-box;
+}
+.frame.h-frame:hover > button {
+    opacity: 1;
+}
+.h-frame .slidee {
+    padding: 100px 0;
+}
+
+.scroll-buttons {
+    position: absolute;
+    top: 50%;
+    font-size: 20px;
+    right: -100px;
+}
+.scroll-buttons li {
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 2px;
+    transition: background 1s;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.scroll-buttons li:hover {
+    background-color: #e0e0e0;
+}
+.scroll-buttons li:active {
+    color: tomato;
+}
+.icon-menu {
+    margin-top: 15px;
+    width: 100%;
+    height: 600px;
+    /*background-color: #f0f0f0;*/
+}
+.icon-menu-item {
+    width: 30%;
+    float: left;
+    height: 30%;
+    /*background-color: #ccc;*/
+    margin: 1%;
+}
+
+.frame-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    background: none;
+    opacity: 0;
+}
+.frame-btn:hover {
+    background: rgba(125,125,125,0.1);
+}
+.frame-btn:active {
+    background: rgba(125,125,125,0.5);
+}
+.frame-btn:disabled {
+    visibility: hidden;
+}
+.frame-btn.h-frame-btn {
+    top: 40%;
+    width: 50px;
+    height: 20%;
+}
+.frame-btn.frame-btn-right {
+    text-align: right;
+    right: 0;
+    border-right: 1px solid #222;
+}
+.frame-btn.frame-btn-left {
+    text-align: left;
+    left: 0;
+    border-left: 1px solid #222;
+}
+.album-title {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+.alert {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: tomato;
+    padding: 5px 0px;
+    
+}
+@media screen and (max-width: 360px) {
+    .splashscreen img {
+        width: 80%;
+        margin-top: 30%;
+    }
+}
+
+.hide-top {
+    top: -3000px;
+}
+
+.fade-out {
+    opacity: 0 !important;
+}
+.fade-in {
+    opacity: 1 !important;
+}
+.img-move-up {
+    margin-top: -100px !important;
+}
+/* loader */
+.loader {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+/*square loading*/
+.square{
+    width: 20px;
+    height: 20px;
+    border:1px  rgba(0,0,0,1) solid;
+    margin: 36px auto;
+    position: relative;
+    -webkit-animation: fill_color 5s linear infinite;
+       -moz-animation: fill_color 5s linear infinite;
+            animation: fill_color 5s linear infinite;
+}
+.square:after{
+    width: 4px;
+    height: 4px;
+    position: absolute;
+    content: "";
+    background-color: rgba(0,0,0,1);
+    top: -8px;
+    left: 0px;
+    -webkit-animation: square_check 1s ease-in-out infinite;
+       -moz-animation: square_check 1s ease-in-out infinite;
+            animation: square_check 1s ease-in-out infinite;
+}
+
+@-webkit-keyframes square_check{
+    25%{ left: 22px; top: -8px;}
+    50%{ left: 22px; top: 22px;}
+    75%{ left: -9px; top: 22px;}
+    100%{ left: -9px; top: -7px;}
+}
+@-moz-keyframes square_check{
+    25%{ left: 22px; top: -8px;}
+    50%{ left: 22px; top: 22px;}
+    75%{ left: -9px; top: 22px;}
+    100%{ left: -9px; top: -7px;}
+}
+@keyframes square_check{
+    25%{ left: 22px; top: -8px;}
+    50%{ left: 22px; top: 22px;}
+    75%{ left: -9px; top: 22px;}
+    100%{ left: -9px; top: -7px;}
+}
+@-webkit-keyframes fill_color{
+    0%{ box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.1);}
+    100%{ box-shadow: inset 0px -20px 0px 0px rgba(0,0,0,1);}
+}
+@-moz-keyframes fill_color{
+    0%{ box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.1);}
+    100%{ box-shadow: inset 0px -20px 0px 0px rgba(0,0,0,1);}
+}
+@keyframes fill_color{
+    0%{ box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.1);}
+    100%{ box-shadow: inset 0px -20px 0px 0px rgba(0,0,0,1);}
+}

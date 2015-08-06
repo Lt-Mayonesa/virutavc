@@ -1,0 +1,252 @@
+/* 
+    Created on : Jun 30, 2015, 12:52:59 PM
+    Author     : Joaquin Campero <juacocampero@gmail.com at www.joacocampero.tk>
+*/
+body {
+    font-family: Din, monospace, sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 15px;
+    border-top: 5px solid #111;
+}
+.menu {
+    width: 30%;
+    float: left;
+    box-sizing: border-box;
+    padding: 15px;
+    padding-left: 50px;
+    border-right: 1px dotted #333;
+}
+.menu ul li {
+    margin: 5px 0;
+}
+.menu button, .menu a {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: #222;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+.menu button:hover, .menu a:hover {
+    background-color: #333;
+    box-shadow: inset 0px -2px 0px #000;
+}
+.menu button:active, .menu a:active {
+    background-color: #111;
+    color: #ccc;
+    box-shadow: inset 0px 2px 0px #000;
+    outline: none;
+}
+.menu h2 {
+    color: #333;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu ul li {
+    margin: 12px 0;
+}
+.forms {
+    width: 70%;
+    float: right;
+    box-sizing: border-box;
+    padding: 25px;
+}
+form {
+    width: 60%;
+    margin: 0 auto;
+    opacity: 0;
+    display: none;
+    transition: all 1s;
+}
+form label {
+    font-size: 22px;
+    display: block;
+    padding: 5px 0px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border-bottom: 1px dotted #999;
+}
+form input, form textarea, form select {
+    display: block;
+    font-size: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    padding: 10px 0px;
+    margin: 0;
+}
+form input:focus, form textarea:focus, form select:focus {
+    outline: none;
+    border-top: 1px solid tomato;
+}
+form input[type='submit'], form select {
+    cursor: pointer;
+}
+form input[type="text"] {
+    padding-left: 3px;
+}
+form input[type='submit'] {
+    margin-top: 20px;
+    border-radius: 2px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+form input[type="radio"] {
+    width: 20px;
+    margin-top: 3px;
+    float: left;
+}
+form input[type='submit']:hover {
+    background-color: #e0e0e0;
+}
+form input[type='submit']:active {
+    background-color: #ccc;
+    color: rgba(0,0,0,0.9);
+}
+
+form option {
+    border: none;
+}
+
+.hide {
+    display: none !important;
+    opacity: 0 !important
+}
+.show {
+    display: block !important;
+    opacity: 1 !important;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    display: none;
+}
+.custom-file-input::before {
+    content: 'Selecciona archivo';
+    display: block;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 10pt;
+}
+.custom-file-input:hover::before {
+    background-color: #f0f0f0;
+}
+.custom-file-input:active::before {
+    background-color: #ccc;
+}
+
+.column {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.column-half {
+    width: 50%;
+    padding: 0 1%;
+}
+.column-left {
+    float: left;
+}
+
+.column-right {
+    float: right;
+}
+.border-dotted-right {
+    border-right: 1px dotted #333;
+}
+
+.menu ul.sub-menu {
+    display: none;
+    margin-left: 10px;
+}
+
+/** ------------------------------------- **/
+.fade-out {
+    display: none !important;
+    opacity: 0 !important;
+}
+.fade-in {
+    display: block !important;
+    opacity: 1 !important;
+}
+/* loader */
+.loader {
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all 0.5s;
+}
+/*square loading*/
+.square{
+    width: 20px;
+    height: 20px;
+    border:1px  rgba(0,0,0,1) solid;
+    margin: 36px auto;
+    position: relative;
+    -webkit-animation: fill_color 5s linear infinite;
+    -moz-animation: fill_color 5s linear infinite;
+    animation: fill_color 5s linear infinite;
+}
+.square:after{
+    width: 4px;
+    height: 4px;
+    position: absolute;
+    content: "";
+    background-color: rgba(0,0,0,1);
+    top: -8px;
+    left: 0px;
+    -webkit-animation: square_check 1s ease-in-out infinite;
+    -moz-animation: square_check 1s ease-in-out infinite;
+    animation: square_check 1s ease-in-out infinite;
+}
+
+@-webkit-keyframes square_check{
+    25%{ left: 22px; top: -8px;}
+    50%{ left: 22px; top: 22px;}
+    75%{ left: -9px; top: 22px;}
+    100%{ left: -9px; top: -7px;}
+}
+@-moz-keyframes square_check{
+    25%{ left: 22px; top: -8px;}
+    50%{ left: 22px; top: 22px;}
+    75%{ left: -9px; top: 22px;}
+    100%{ left: -9px; top: -7px;}
+}
+@keyframes square_check{
+    25%{ left: 22px; top: -8px;}
+    50%{ left: 22px; top: 22px;}
+    75%{ left: -9px; top: 22px;}
+    100%{ left: -9px; top: -7px;}
+}
+@-webkit-keyframes fill_color{
+    0%{ box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.1);}
+    100%{ box-shadow: inset 0px -20px 0px 0px rgba(0,0,0,1);}
+}
+@-moz-keyframes fill_color{
+    0%{ box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.1);}
+    100%{ box-shadow: inset 0px -20px 0px 0px rgba(0,0,0,1);}
+}
+@keyframes fill_color{
+    0%{ box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.1);}
+    100%{ box-shadow: inset 0px -20px 0px 0px rgba(0,0,0,1);}
+}
