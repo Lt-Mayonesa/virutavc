@@ -27,7 +27,7 @@
                 </header>
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="javascript:void(0)">Menu</a></li>
+                        <li><a href="javascript:void(0)" onclick="$('#icon_menu').attr('class','icon-menu shrink-middle')">Menu</a></li>
                         <?php
                         $menuCategories = queryDB('SELECT * FROM categories WHERE active = true', true, $dbhost, $dbuser, $dbpswd, $dbname);
                         if ($menuCategories) {
@@ -46,12 +46,9 @@
                     <div class="square"></div>
                 </div>
                 <div id="frame" class="frame">
-                    <div id="slidee" class="slidee">
-                        <!--                                            <article data-sr class="work">
-                                                                        <img src="img/coso.jpg" alt="imagen" />
-                                                                    </article>-->
-                    </div>
-                    <div class="icon-menu">
+                    <div id="slidee" class="slidee"></div>
+                </div>
+                <div id="icon_menu" class="icon-menu">
                         <div class="icon-menu-item">a</div>
                         <div class="icon-menu-item">b</div>
                         <div class="icon-menu-item">c</div>
@@ -62,7 +59,6 @@
                         <div class="icon-menu-item">h</div>
                         <div class="icon-menu-item">i</div>
                     </div>
-                </div>
                 <ul id="scroll_buttons" class="scroll-buttons">
                     <li id="prev_work">&uparrow;</li>
                     <li id="next_work">&downarrow;</li>

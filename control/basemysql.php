@@ -1,5 +1,6 @@
 <?php
 
+require ('config' . DIRECTORY_SEPARATOR . 'config.php');
 /**
  * Make query to db
  * @param String $query the mySQL sintax query

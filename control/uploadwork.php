@@ -1,11 +1,10 @@
 <?php
-
-require ('config' . DIRECTORY_SEPARATOR . 'config.php');
-require ('basemysql.php');
 $response = [
     'error' => true,
     'msg' => 'unknown error',
 ];
+require ('config' . DIRECTORY_SEPARATOR . 'config.php');
+require ('basemysql.php');
 
 $title = filter_input(INPUT_POST, 'work_title');
 $desc = filter_input(INPUT_POST, 'work_description');

@@ -9,6 +9,7 @@
     </head>
     <?php
     require ('config' . DIRECTORY_SEPARATOR . 'config.php');
+    require ('basemysql.php');
     ?>
     <body>
         <div id="loader" class="loader">
