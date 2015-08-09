@@ -165,3 +165,20 @@ function operationError(msg) {
     var message = msg || 'Error desconocido, intentalo de nuevo.';
     alert(msg);
 }
+
+function showPage(id, direction) {
+    hidePages(direction);
+    if (direction) {
+        $('#' + id).attr('class', 'page expand-' + direction);
+    } else {
+        $('#' + id).attr('class', 'page expand-middle');
+    }
+}
+
+function hidePages(direction) {
+    if (direction) {
+        $('.page').attr('class', 'page shrink-' + direction);
+    } else {
+        $('.page').attr('class', 'page shrink-middle');
+    }
+}
