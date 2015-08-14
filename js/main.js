@@ -13,9 +13,13 @@ function showActions(id) {
 function getWorkStructure(data, innerWork, currentImage) {
     var workClass = innerWork ? 'work inner-work' : 'work';
 
-    return '<article id="' + data.id + '" class="' + workClass + '"><div class="work-img"><img id="' + currentImage + '" onclick="showImage(this.id);" onload="addItem(this);" src="uploaded/' + data.url + '" alt="imagen"/></div>\n\
-                <div class="work-info">\n\
-                    <h2>' + data.title + '</h2><p>' + data.description + '</p><p>' + data.created + '</p>\n\
+    return '<article id="' + data.id + '" class="' + workClass + '">\n\
+                <div class="work-img">\n\
+                    <span class="vertical-center-helper"></span>\n\
+                    <img id="' + currentImage + '" onclick="showImage(this.id);" onload="addItem(this);" src="uploaded/' + data.url + '" alt="imagen"/>\n\
+                    <div id="work_info_' + currentImage + '" class="work-info">\n\
+                        <h2>' + data.title + '</h2><p>' + data.description + '</p><p>' + data.created + '</p>\n\
+                    </div>\n\
                 </div>\n\
             </article>';
 }
@@ -30,6 +34,7 @@ function getWorks(id) {
     }
     $.get('actions/getbycategory.php?id=' + id, function (res) {
         var hFramesIds = [];
+        var addedAlbums = [];
         if (!res.error) {
             var items = res.items;
             var lastAlbum = 1;
@@ -42,17 +47,27 @@ function getWorks(id) {
                     $('#slidee').append(getWorkStructure(item, false, i));
                 } else {
                     if (lastAlbum != item.album_id) {
-                        $('#slidee').append(
-                                '<div class="frame h-frame"><div id="album_' + item.album_id + '" class="slidee">\n\
-                                    ' + getWorkStructure(item, true, i) + '\
-                                </div><button id="album_btn_next_' + item.album_id + '" class="frame-btn frame-btn-right h-frame-btn">&ShortRightArrow;</button><button id="album_btn_prev_' + item.album_id + '" class="frame-btn frame-btn-left h-frame-btn">&ShortLeftArrow;</button><h3 class="album-title">' + item.albumTitle + '</h3></div>'
-                                );
-                        hFramesIds.push(item.album_id);
+                        if (addedAlbums.indexOf(item.album_id) != -1) {
+                            $('#album_' + item.album_id).append(getWorkStructure(item, true, i));
+                        } else {
+                            $('#slidee').append(
+                                    '<div class="frame h-frame">\n\
+                                        <div id="album_' + item.album_id + '" class="slidee">\n\
+                                            ' + getWorkStructure(item, true, i) + '\
+                                        </div>\n\
+                                        <button id="album_btn_next_' + item.album_id + '" class="frame-btn frame-btn-right h-frame-btn" disabled>&ShortRightArrow;</button>\n\
+                                        <button id="album_btn_prev_' + item.album_id + '" class="frame-btn frame-btn-left h-frame-btn" disabled>&ShortLeftArrow;</button>\n\
+                                        <h3 class="album-title">' + item.albumTitle + '</h3>\n\
+                                    </div>'
+                                    );
+                            hFramesIds.push(item.album_id);
+                        }
                     } else {
                         $('#album_' + lastAlbum).append(getWorkStructure(item, true, i));
                     }
                 }
                 lastAlbum = item.album_id;
+                addedAlbums.push(item.album_id);
             }
         } else {
             $('#slidee').append('<p class="alert no-works">Todavia no hay trabajos!</p>');
@@ -126,12 +141,15 @@ $(document).ready(function () {
 });
 
 function showImage(id) {
-    // start index correct id
-    //optionsPS.index = id;
-    var image = [];
+/*    var image = [];
     image.push(items[id]);
     gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, image, optionsPS);
-    gallery.init();
+    gallery.init();*/
+    var pos = $('#' + id).position();
+    var h = $('#' + id).height();
+    console.log(pos, h);
+    $('#work_info_' + id).css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
+    console.log($('#work_info_' + id));
 }
 
 function addItem(img) {
