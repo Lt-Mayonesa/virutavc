@@ -141,6 +141,7 @@ body {
 }
 .work-info .info-text {
     width: 190px;
+    height: 80%;
     line-height: 22px;
     word-wrap: break-word;
     margin-top: 10px;
@@ -164,7 +165,7 @@ body {
     position: relative;
     height: 100%;
     min-height: 520px;
-    max-height: 640px;
+    max-height: 760px;
     box-sizing: border-box;
 }
 .frame .slidee {
@@ -306,6 +307,61 @@ body {
     line-height: 22px;
     padding: 0px 5px 0px 10px;
     margin: 10px 0px;
+}
+
+form {
+    width: 60%;
+    margin: 0 auto;
+}
+form label {
+    font-size: 22px;
+    display: block;
+    padding: 5px 0px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border-bottom: 1px dotted #999;
+}
+form input, form textarea, form select {
+    display: block;
+    font-size: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+    padding: 10px 5px;
+    margin: 0;
+}
+form input:focus, form textarea:focus, form select:focus {
+    outline: none;
+    border-top: 1px solid tomato;
+}
+form input[type='submit'], form select {
+    cursor: pointer;
+}
+form input[type="text"] {
+    padding-left: 3px;
+}
+form input[type='submit'] {
+    margin-top: 20px;
+    border-radius: 2px;
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+form input[type="radio"] {
+    width: 20px;
+    margin-top: 3px;
+    float: left;
+}
+form input[type='submit']:hover {
+    background-color: #e0e0e0;
+}
+form input[type='submit']:active {
+    background-color: #ccc;
+    color: rgba(0,0,0,0.9);
+}
+
+form option {
+    border: none;
 }
 .facebook-feed {
     width: 320px;

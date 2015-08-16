@@ -66,8 +66,8 @@ function getWorks(id) {
                         $('#album_' + lastAlbum).append(getWorkStructure(item, true, i));
                     }
                 }
-                pos = $('#' + i).position();
-                h = $('#' + i).height();
+                var pos = $('#' + i).position();
+                var h = $('#' + i).height();
                 $('#work_info_' + i).css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
                 lastAlbum = item.album_id;
                 addedAlbums.push(item.album_id);
@@ -87,6 +87,7 @@ function getWorks(id) {
         frame = new Sly('#frame', options).init();
         FRAMES.push(frame);
         loader.hide();
+        showPage('frame', 'left');
     }, 'json');
 }
 var FRAMES = [];
@@ -199,9 +200,17 @@ function operationError(msg) {
 function showPage(id, direction) {
     hidePages(direction);
     if (direction) {
-        $('#' + id).attr('class', 'page expand-' + direction);
+        if (id == 'frame') {
+            $('#' + id).css('opacity','1');
+        } else {
+            $('#' + id).attr('class', 'page expand-' + direction);
+        }
     } else {
-        $('#' + id).attr('class', 'page expand-middle');
+        if (id == 'frame') {
+            $('#' + id).css('opacity','1');
+        } else {
+            $('#' + id).attr('class', 'page expand-middle');
+        }
     }
 }
 
@@ -211,4 +220,5 @@ function hidePages(direction) {
     } else {
         $('.page').attr('class', 'page shrink-middle');
     }
+    $('#frame').css('opacity','0');
 }
