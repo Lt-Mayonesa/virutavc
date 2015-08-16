@@ -14,11 +14,11 @@ function getWorkStructure(data, innerWork, currentImage) {
     var workClass = innerWork ? 'work inner-work' : 'work';
 
     return '<article id="' + data.id + '" class="' + workClass + '">\n\
-                <div class="work-img">\n\
+                <div class="work-img" onmouseout="hideInfo(' + currentImage + ')">\n\
                     <span class="vertical-center-helper"></span>\n\
-                    <img id="' + currentImage + '" onclick="showImage(this.id);" onload="addItem(this);" src="uploaded/' + data.url + '" alt="imagen"/>\n\
-                    <div id="work_info_' + currentImage + '" class="work-info">\n\
-                        <h2>' + data.title + '</h2><p>' + data.description + '</p><p>' + data.created + '</p>\n\
+                    <img id="' + currentImage + '" onclick="showImage(this.id);" onload="addItem(this);" onmouseover="showInfo(this.id)" src="uploaded/' + data.url + '" alt="imagen"/>\n\
+                    <div id="work_info_' + currentImage + '" class="work-info" onmouseover="showInfo(' + currentImage + ')">\n\
+                        <h2>' + data.title + '</h2><p class="info-text">' + data.description + '</p><p class="info-footer">' + data.created + '</p>\n\
                     </div>\n\
                 </div>\n\
             </article>';
@@ -66,6 +66,9 @@ function getWorks(id) {
                         $('#album_' + lastAlbum).append(getWorkStructure(item, true, i));
                     }
                 }
+                pos = $('#' + i).position();
+                h = $('#' + i).height();
+                $('#work_info_' + i).css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
                 lastAlbum = item.album_id;
                 addedAlbums.push(item.album_id);
             }
@@ -141,15 +144,24 @@ $(document).ready(function () {
 });
 
 function showImage(id) {
-/*    var image = [];
+    var image = [];
     image.push(items[id]);
     gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, image, optionsPS);
-    gallery.init();*/
+    gallery.init();
+}
+
+function showInfo(id) {
+    var info = $('#work_info_' + id);
     var pos = $('#' + id).position();
     var h = $('#' + id).height();
-    console.log(pos, h);
-    $('#work_info_' + id).css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
-    console.log($('#work_info_' + id));
+    info.css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
+    info.attr('class', 'work-info extended');
+}
+
+function hideInfo(id) {
+    var info = $('#work_info_' + id);
+    info.attr('class', 'work-info');
+    console.log(info);
 }
 
 function addItem(img) {

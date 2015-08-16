@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     $response['msg'] = 'MySQL error: ' . $conn->connect_error;
 } else {
     $items = [];
-    $query = "SELECT w.id, w.`title`, w.`description`, w.`url`, w.`category_id`, w.`album_id`, w.`created`, a.`title` as albumTitle, a.`description` as albumDescription FROM works as w INNER JOIN albums as a ON w.album_id = a.id WHERE w.category_id = " . $categoryId . " ORDER BY w.created ASC";
+    $query = "SELECT w.id, w.`title`, w.`description`, w.`url`, w.`category_id`, w.`album_id`, YEAR(w.`created`) as created, a.`title` as albumTitle, a.`description` as albumDescription FROM works as w INNER JOIN albums as a ON w.album_id = a.id WHERE w.category_id = " . $categoryId . " ORDER BY w.created ASC";
     $result = $conn->query($query);
     if ($result) {
         if ($result->num_rows > 0) {

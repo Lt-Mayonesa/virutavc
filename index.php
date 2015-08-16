@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Viruta VC</title>
-        <!--link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'-->
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/reset.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/photoswipe.css"> 
@@ -79,10 +79,10 @@
                 </article>
                 <article id="page_about" class="page" style="opacity: 0;">
                     <div class="page-content padding">
-                    <h2>Valentin Cacault</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus rutrum dui nec dui maximus accumsan. Fusce non tristique nisl. Ut tristique lacus eu mi venenatis, ac ultrices est rhoncus. Etiam eu venenatis sem. Nunc placerat luctus odio, quis ullamcorper tellus luctus sit amet. Nulla ultricies metus eget felis finibus, vitae interdum purus consequat. Proin in aliquam mauris. Vivamus id tincidunt odio. Phasellus nibh mi, suscipit non odio eget, interdum lobortis turpis. Mauris arcu sem, fringilla at nunc sagittis, dignissim posuere neque.</p>
-                        <p>Cras consequat bibendum eros, vitae placerat ante posuere vel. Curabitur fringilla eleifend odio ut posuere. Pellentesque quis mollis elit. Praesent efficitur, ex at dictum malesuada, turpis nulla egestas libero, sed efficitur odio mauris eu est. Cras quis lorem fermentum orci sodales iaculis ut egestas erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae tempus ipsum, id vestibulum lorem. Suspendisse aliquam urna at libero convallis, vel suscipit metus commodo. Maecenas varius lacus nisi, efficitur viverra turpis tincidunt vel.</p>
-                        </div>
+                        <h2>Valentin Cacault</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus rutrum dui nec dui maximus accumsan. Fusce non tristique nisl. Ut tristique lacus eu mi venenatis, ac ultrices est rhoncus. Etiam eu venenatis sem. Nunc placerat luctus odio, quis ullamcorper tellus luctus sit amet. Nulla ultricies metus eget felis finibus, vitae interdum purus consequat. Proin in aliquam mauris. Vivamus id tincidunt odio. Phasellus nibh mi, suscipit non odio eget, interdum lobortis turpis. Mauris arcu sem, fringilla at nunc sagittis, dignissim posuere neque.</p>
+                            <p>Cras consequat bibendum eros, vitae placerat ante posuere vel. Curabitur fringilla eleifend odio ut posuere. Pellentesque quis mollis elit. Praesent efficitur, ex at dictum malesuada, turpis nulla egestas libero, sed efficitur odio mauris eu est. Cras quis lorem fermentum orci sodales iaculis ut egestas erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae tempus ipsum, id vestibulum lorem. Suspendisse aliquam urna at libero convallis, vel suscipit metus commodo. Maecenas varius lacus nisi, efficitur viverra turpis tincidunt vel.</p>
+                    </div>
                 </article>
                 <article id="page_contact" class="page" style="opacity: 0;">
                     <div class="page-content padding">
