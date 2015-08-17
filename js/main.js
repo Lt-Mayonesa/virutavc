@@ -55,8 +55,8 @@ function getWorks(id) {
                                         <div id="album_' + item.album_id + '" class="slidee">\n\
                                             ' + getWorkStructure(item, true, i) + '\
                                         </div>\n\
-                                        <button id="album_btn_next_' + item.album_id + '" class="frame-btn frame-btn-right h-frame-btn" disabled>&ShortRightArrow;</button>\n\
-                                        <button id="album_btn_prev_' + item.album_id + '" class="frame-btn frame-btn-left h-frame-btn" disabled>&ShortLeftArrow;</button>\n\
+                                        <button id="album_btn_next_' + item.album_id + '" class="frame-btn frame-btn-right h-frame-btn">&ShortRightArrow;</button>\n\
+                                        <button id="album_btn_prev_' + item.album_id + '" class="frame-btn frame-btn-left h-frame-btn">&ShortLeftArrow;</button>\n\
                                         <h3 class="album-title">' + item.albumTitle + '</h3>\n\
                                     </div>'
                                     );
@@ -83,10 +83,10 @@ function getWorks(id) {
                 frame = new Sly(hFrames[i], optionsHorizontal).init();
                 FRAMES.push(frame);
             }
+            loader.hide();
         }, 1000);
         frame = new Sly('#frame', options).init();
         FRAMES.push(frame);
-        loader.hide();
         showPage('frame', 'left');
     }, 'json');
 }
@@ -201,13 +201,13 @@ function showPage(id, direction) {
     hidePages(direction);
     if (direction) {
         if (id == 'frame') {
-            $('#' + id).css('opacity','1');
+            $('#' + id).css('display','block');
         } else {
             $('#' + id).attr('class', 'page expand-' + direction);
         }
     } else {
         if (id == 'frame') {
-            $('#' + id).css('opacity','1');
+            $('#' + id).css('display','block');
         } else {
             $('#' + id).attr('class', 'page expand-middle');
         }
@@ -215,10 +215,11 @@ function showPage(id, direction) {
 }
 
 function hidePages(direction) {
+    console.log(direction);
     if (direction) {
         $('.page').attr('class', 'page shrink-' + direction);
     } else {
         $('.page').attr('class', 'page shrink-middle');
     }
-    $('#frame').css('opacity','0');
+    $('#frame').css('display','none');
 }
