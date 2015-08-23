@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <title>Viruta VC</title>
+	<link rel="icon" href="favicon.png" sizes="16x16" type="image/png" />
         <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/reset.css"/>
         <link rel="stylesheet" href="css/style.css"/>
@@ -12,7 +13,7 @@
         <script src="js/jquery/jquery.js" ></script>
         <!--script src="//code.jquery.com/jquery-1.11.3.min.js"></script-->
         <script src="js/sly/sly.js" ></script>
-        <script src="js/photoswipe/photoswipe.min.js"></script> 
+        <script src="js/photoswipe/photoswipe.min.js"></script>
         <script src="js/photoswipe/photoswipe-ui-default.min.js"></script> 
         <script src="js/main.js"></script>
     </head>
@@ -21,8 +22,8 @@
     require ('control' . DIRECTORY_SEPARATOR . 'basemysql.php');
     ?>
     <body>
-        <!--div id="fb-root"></div>
-        <script>(function(d, s, id) {
+        <div id="fb-root"></div>
+        <!--script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
@@ -34,7 +35,7 @@
         <div class="cont-gral" >
             <div class="sidebar">
                 <header>
-                    <img src="img/eye.png" alt="logo" width="40"/>
+                    <img src="img/icon.png" alt="logo" width="130"/>
                     <h1>Viruta VC</h1>
                 </header>
                 <nav class="main-nav">
@@ -53,6 +54,7 @@
                     </ul>
                 </nav>
             </div>
+            <div id="info_cont" class="info-container"></div>
             <div class="content">
                 <div id="loader" class="loader">
                     <div class="square"></div>
@@ -62,12 +64,7 @@
                 </div>
                 <article id="page_menu" class="page">
                     <div class="page-content padding">
-                        <div>
-                            <div class="icon-menu-item">
-                                <a href="#" style="display: block;">
-                                    <img src="img/eye.png" width="140" height="140" />
-                                </a>
-                            </div>
+                        <div id="thumbnails_cont">
                         </div>
                         <!--aside class="facebook-feed">
                             <div class="fb-page" data-href="https://www.facebook.com/virutavc" data-width="320" data-height="500" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false" data-show-posts="true">
@@ -91,7 +88,7 @@
                     <div class="page-content padding">
                         <h2>Contactame loco</h2>
                         <div class="contact-form">
-                            <form action="mailer.php" method="POST">
+                            <form action="actions/mailer.php" method="POST">
                                 <label for="contactName">Nombre:</label>
                                 <input name="contactName" type="text" placeholder="..." required/>
                                 <label for="contactEmail">Mail:</label>

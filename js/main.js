@@ -12,20 +12,32 @@ function showActions(id) {
 
 function getWorkStructure(data, innerWork, currentImage) {
     var workClass = innerWork ? 'work inner-work' : 'work';
-
     return '<article id="' + data.id + '" class="' + workClass + '">\n\
                 <div class="work-img" onmouseout="hideInfo(' + currentImage + ')">\n\
                     <span class="vertical-center-helper"></span>\n\
                     <img id="' + currentImage + '" onclick="showImage(this.id);" onload="addItem(this);" onmouseover="showInfo(this.id)" src="uploaded/' + data.url + '" alt="imagen"/>\n\
-                    <div id="work_info_' + currentImage + '" class="work-info" onmouseover="showInfo(' + currentImage + ')">\n\
-                        <h2>' + data.title + '</h2><p class="info-text">' + data.description + '</p><p class="info-footer">' + data.created + '</p>\n\
-                    </div>\n\
                 </div>\n\
             </article>';
+}
+
+function getWorkThumbStructure(item) {
+    return '<div id="work_thumb_' + item.id + '" data-category="' + item.category_id + '" class="work-thumbnail" style="background-image: url(uploaded/' + item.url + ')">\n\
+                <p>' + item.title + '</p>\n\
+            </div>';
+}
+
+function getWorkInfoStructure(imgIndex) {
+    var info = WORKS_INFO[imgIndex];
+    return '<div id="work_info_' + imgIndex + '" class="work-info">\n\
+            <h2>' + info.title + '</h2>\n\
+            <p class="info-text">' + info.description + '</p>\n\
+            <p class="info-footer">' + info.created + '</p>\n\
+        </div>';
 }
 function getWorks(id) {
     loader.show();
     $('#slidee').empty();
+    $('#frame').css('display', 'block');
     items = [];
     if (FRAMES.length > 0) {
         for (var f in FRAMES) {
@@ -71,6 +83,11 @@ function getWorks(id) {
                 $('#work_info_' + i).css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
                 lastAlbum = item.album_id;
                 addedAlbums.push(item.album_id);
+                WORKS_INFO[i] = {
+                    'title' : item.title,
+                    'description' : item.description,
+                    'created' : item.created,
+                };
             }
         } else {
             $('#slidee').append('<p class="alert no-works">Todavia no hay trabajos!</p>');
@@ -90,9 +107,21 @@ function getWorks(id) {
         showPage('frame', 'left');
     }, 'json');
 }
+
+function getLastWorks() {
+    $.getJSON('actions/getlastworks.php', function (data) {
+        if (!data.error) {
+            var items = data.items;
+            for (var i = 0; i < items.length; i++) {
+                $('#thumbnails_cont').append(getWorkThumbStructure(items[i]));
+            }
+        }
+    });
+}
 var FRAMES = [];
 var frame = null;
 var WORKS_TOTAL = 0;
+var WORKS_INFO = [];
 var options = {
     scrollSource: document,
     scrollBy: 1,
@@ -137,7 +166,7 @@ var gallery;
 $(document).ready(function () {
     loader = new Loader('loader');
     pswpElement = document.querySelectorAll('.pswp')[0];
-
+    getLastWorks();
 }).ajaxStart(function () {
     loader.show();
 }).ajaxComplete(function () {
@@ -152,17 +181,20 @@ function showImage(id) {
 }
 
 function showInfo(id) {
-    var info = $('#work_info_' + id);
+    /*var info = $('#work_info_' + id);
     var pos = $('#' + id).position();
     var h = $('#' + id).height();
     info.css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
-    info.attr('class', 'work-info extended');
+    info.attr('class', 'work-info extended');*/
+    var info = getWorkInfoStructure(id);
+    $('#info_cont').append(info);
 }
 
 function hideInfo(id) {
-    var info = $('#work_info_' + id);
+    /*var info = $('#work_info_' + id);
     info.attr('class', 'work-info');
-    console.log(info);
+    */
+    $('#info_cont').empty();
 }
 
 function addItem(img) {
@@ -198,28 +230,25 @@ function operationError(msg) {
 }
 
 function showPage(id, direction) {
-    hidePages(direction);
-    if (direction) {
-        if (id == 'frame') {
-            $('#' + id).css('display','block');
-        } else {
-            $('#' + id).attr('class', 'page expand-' + direction);
-        }
+    hidePages(id, direction);
+    if (id == 'frame') {
+        $('#' + id).css('display','block');
     } else {
-        if (id == 'frame') {
-            $('#' + id).css('display','block');
+        if (direction) {
+            $('#' + id).attr('class', 'page expand-' + direction);
         } else {
             $('#' + id).attr('class', 'page expand-middle');
         }
     }
 }
 
-function hidePages(direction) {
-    console.log(direction);
+function hidePages(id, direction) {
     if (direction) {
         $('.page').attr('class', 'page shrink-' + direction);
     } else {
         $('.page').attr('class', 'page shrink-middle');
     }
-    $('#frame').css('display','none');
+    if (id != 'frame') {
+        $('#frame').css('display','none');
+    }
 }
