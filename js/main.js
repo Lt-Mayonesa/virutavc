@@ -21,7 +21,7 @@ function getWorkStructure(data, innerWork, currentImage) {
 }
 
 function getWorkThumbStructure(item) {
-    return '<div id="work_thumb_' + item.id + '" data-category="' + item.category_id + '" class="work-thumbnail" style="background-image: url(uploaded/' + item.url + ')">\n\
+    return '<div id="work_thumb_' + item.id + '" data-category="' + item.category_id + '" class="work-thumbnail" style="background-image: url(uploaded/' + item.url + ')" onclick="getWorks(this.dataset.category, 1)">\n\
                 <p>' + item.title + '</p>\n\
             </div>';
 }
@@ -34,7 +34,7 @@ function getWorkInfoStructure(imgIndex) {
             <p class="info-footer">' + info.created + '</p>\n\
         </div>';
 }
-function getWorks(id) {
+function getWorks(id, work) {
     loader.show();
     $('#slidee').empty();
     $('#frame').css('display', 'block');
@@ -105,6 +105,9 @@ function getWorks(id) {
         frame = new Sly('#frame', options).init();
         FRAMES.push(frame);
         showPage('frame', 'left');
+        if (work != null) {
+            frame.slideTo(work);
+        }
     }, 'json');
 }
 
@@ -211,9 +214,11 @@ function Loader(elm) {
 ;
 
 Loader.prototype.show = function () {
+    this.elm.style.display = 'block';
     this.elm.className = 'loader fade-in';
 };
 Loader.prototype.hide = function () {
+    this.elm.style.display = 'none';
     this.elm.className = 'loader fade-out';
 };
 

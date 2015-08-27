@@ -45,7 +45,7 @@
                         $menuCategories = queryDB('SELECT * FROM categories WHERE active = true', true, $dbhost, $dbuser, $dbpswd, $dbname);
                         if ($menuCategories) {
                             foreach ($menuCategories as $key => $row) {
-                                echo '<li><a href="javascript:void(0)" onclick="getWorks(' . $row['id'] . ');">' . $row['name'] . '</a></li>';
+                                echo '<li><a id="btn_get_works_' . $row['id'] .  '" href="javascript:void(0)" onclick="getWorks(' . $row['id'] . ');">' . $row['name'] . '</a></li>';
                             }
                         }
                         ?>
