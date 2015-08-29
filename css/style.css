@@ -280,9 +280,10 @@ body {
     padding: 5px 0px;
     
 }
-#page_about .page-content {
+#page_about .page-content div {
     width: 500px;
     margin: 0 auto;
+    margin-top: 25px;
 }
 #page_about h2, #page_contact h2 {
     margin-top: 40px;
@@ -485,7 +486,7 @@ form option {
     border-bottom: 2px dotted tomato;
     position: fixed;
     right: 50px;
-    top: 0;
+    top: -2px;
     z-index: 100;
     transition: all 1s;
 }

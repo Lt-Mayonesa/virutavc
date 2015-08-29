@@ -4,8 +4,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <title>Viruta VC</title>
-	<link rel="icon" href="favicon.png" sizes="16x16" type="image/png" />
-        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+	   <link rel="icon" href="favicon.png" sizes="16x16" type="image/png" />
+        <!--link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'-->
         <link rel="stylesheet" href="css/reset.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/photoswipe.css"> 
@@ -16,6 +16,17 @@
         <script src="js/photoswipe/photoswipe.min.js"></script>
         <script src="js/photoswipe/photoswipe-ui-default.min.js"></script> 
         <script src="js/main.js"></script>
+
+        <meta property="og:title" content="Trabajos" />
+        <meta property="og:site_name" content="Viruta VC"/>
+        <meta property="og:url" content="http://virutavc.com"/>
+        <meta property="og:image" content="http://virutavc.com/img/icon.png"/>
+        <meta property="og:description" content="Los Maravillosos trabajos de Valentín Cacault"/>
+        <meta property="og:type" content="article" />
+        <meta property="og:locale" content="es_AR"/>
+        <meta property="article:author" content="https://www.facebook.com/virutavc" />
+        <meta property="article:publisher" content="https://www.facebook.com/virutavc" />
+
     </head>
     <?php
     require ('control' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php');
@@ -40,17 +51,17 @@
                 </header>
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="javascript:void(0)" onclick="showPage('page_menu', 'left');">Menu</a></li>
+                        <li id="li_page_menu"><a href="javascript:void(0)" onclick="showPage('page_menu', 'left');">Menu</a></li>
                         <?php
                         $menuCategories = queryDB('SELECT * FROM categories WHERE active = true', true, $dbhost, $dbuser, $dbpswd, $dbname);
                         if ($menuCategories) {
                             foreach ($menuCategories as $key => $row) {
-                                echo '<li><a id="btn_get_works_' . $row['id'] .  '" href="javascript:void(0)" onclick="getWorks(' . $row['id'] . ');">' . $row['name'] . '</a></li>';
+                                echo '<li id="li_page_cat_' . $row['id'] . '"><a id="btn_get_works_' . $row['id'] .  '" href="javascript:void(0)" onclick="getWorks(' . $row['id'] . ');">' . $row['name'] . '</a></li>';
                             }
                         }
                         ?>
-                        <li><a href="javascript:void(0)" onclick="showPage('page_about', 'left');">Acerca</a></li>
-                        <li><a href="javascript:void(0)" onclick="showPage('page_contact', 'left');">Contacto</a></li>
+                        <li id="li_page_about"><a href="javascript:void(0)" onclick="showPage('page_about', 'left');">Acerca</a></li>
+                        <li id="li_page_contact"><a href="javascript:void(0)" onclick="showPage('page_contact', 'left');">Contacto</a></li>
                     </ul>
                 </nav>
             </div>
@@ -80,13 +91,15 @@
                 <article id="page_about" class="page shrink-left" style="opacity: 0;">
                     <div class="page-content padding">
                         <h2>Valentin Cacault</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus rutrum dui nec dui maximus accumsan. Fusce non tristique nisl. Ut tristique lacus eu mi venenatis, ac ultrices est rhoncus. Etiam eu venenatis sem. Nunc placerat luctus odio, quis ullamcorper tellus luctus sit amet. Nulla ultricies metus eget felis finibus, vitae interdum purus consequat. Proin in aliquam mauris. Vivamus id tincidunt odio. Phasellus nibh mi, suscipit non odio eget, interdum lobortis turpis. Mauris arcu sem, fringilla at nunc sagittis, dignissim posuere neque.</p>
-                        <p>Cras consequat bibendum eros, vitae placerat ante posuere vel. Curabitur fringilla eleifend odio ut posuere. Pellentesque quis mollis elit. Praesent efficitur, ex at dictum malesuada, turpis nulla egestas libero, sed efficitur odio mauris eu est. Cras quis lorem fermentum orci sodales iaculis ut egestas erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae tempus ipsum, id vestibulum lorem. Suspendisse aliquam urna at libero convallis, vel suscipit metus commodo. Maecenas varius lacus nisi, efficitur viverra turpis tincidunt vel.</p>
+                        <div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus rutrum dui nec dui maximus accumsan. Fusce non tristique nisl. Ut tristique lacus eu mi venenatis, ac ultrices est rhoncus. Etiam eu venenatis sem. Nunc placerat luctus odio, quis ullamcorper tellus luctus sit amet. Nulla ultricies metus eget felis finibus, vitae interdum purus consequat. Proin in aliquam mauris. Vivamus id tincidunt odio. Phasellus nibh mi, suscipit non odio eget, interdum lobortis turpis. Mauris arcu sem, fringilla at nunc sagittis, dignissim posuere neque.</p>
+                            <p>Cras consequat bibendum eros, vitae placerat ante posuere vel. Curabitur fringilla eleifend odio ut posuere. Pellentesque quis mollis elit. Praesent efficitur, ex at dictum malesuada, turpis nulla egestas libero, sed efficitur odio mauris eu est. Cras quis lorem fermentum orci sodales iaculis ut egestas erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae tempus ipsum, id vestibulum lorem. Suspendisse aliquam urna at libero convallis, vel suscipit metus commodo. Maecenas varius lacus nisi, efficitur viverra turpis tincidunt vel.</p>
+                        </div>
                     </div>
                 </article>
                 <article id="page_contact" class="page shrink-left" style="opacity: 0;">
                     <div class="page-content padding">
-                        <h2>Contactame loco</h2>
+                        <h2>Contactame</h2>
                         <div class="contact-form">
                             <form action="actions/mailer.php" method="POST">
                                 <label for="contactName">Nombre:</label>

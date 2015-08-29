@@ -15,13 +15,13 @@ function getWorkStructure(data, innerWork, currentImage) {
     return '<article id="' + data.id + '" class="' + workClass + '">\n\
                 <div class="work-img" onmouseout="hideInfo(' + currentImage + ')">\n\
                     <span class="vertical-center-helper"></span>\n\
-                    <img id="' + currentImage + '" onclick="showImage(this.id);" onload="addItem(this);" onmouseover="showInfo(this.id)" src="uploaded/' + data.url + '" alt="imagen"/>\n\
+                    <img id="' + currentImage + '" onclick="showImage(this);" onload="addItem(this);" onmouseover="showInfo(this.id)" src="uploaded/' + data.url + '" alt="imagen"/>\n\
                 </div>\n\
             </article>';
 }
 
 function getWorkThumbStructure(item) {
-    return '<div id="work_thumb_' + item.id + '" data-category="' + item.category_id + '" class="work-thumbnail" style="background-image: url(uploaded/' + item.url + ')" onclick="getWorks(this.dataset.category, 1)">\n\
+    return '<div id="work_thumb_' + item.id + '" data-category="' + item.category_id + '" class="work-thumbnail" style="background-image: url(uploaded/' + item.url + ')" onclick="getWorks(this.dataset.category, ' + item.id + ')">\n\
                 <p>' + item.title + '</p>\n\
             </div>';
 }
@@ -44,6 +44,7 @@ function getWorks(id, work) {
             FRAMES[f].destroy();
         }
     }
+
     $.get('actions/getbycategory.php?id=' + id, function (res) {
         var hFramesIds = [];
         var addedAlbums = [];
@@ -104,9 +105,9 @@ function getWorks(id, work) {
         }, 1000);
         frame = new Sly('#frame', options).init();
         FRAMES.push(frame);
-        showPage('frame', 'left');
+        showPage('frame', 'left', id);
         if (work != null) {
-            frame.slideTo(work);
+            frame.toCenter($('#' + work));
         }
     }, 'json');
 }
@@ -159,10 +160,18 @@ var loader;
 var sly;
 var items = [];
 var pswpElement;
+var CURRENT_PAGE = 0;
+var Navigation = {
+    currentPage: 0,
+    currentCategory: null,
+    currentImage: null
+};
 var optionsPS = {
-    index: 0, // start at first slide
+    index: 0,
     closeOnScroll: false,
-    bgOpacity: 0.9
+    bgOpacity: 0.9,
+    history: true,
+    galleryPIDs: true
 };
 var gallery;
 
@@ -170,33 +179,34 @@ $(document).ready(function () {
     loader = new Loader('loader');
     pswpElement = document.querySelectorAll('.pswp')[0];
     getLastWorks();
+    setCurrentPage('li_page_menu');
+    var params = parseUrlParameters();
+    console.log(params, params.c);
+    if (params.gid != null) {
+        getWorks(params.gid, params.pid);
+    }
 }).ajaxStart(function () {
     loader.show();
 }).ajaxComplete(function () {
     loader.hide();
 });
 
-function showImage(id) {
+function showImage(el) {
+    var id = el.id;
     var image = [];
+    Navigation.currentImage = el.parentElement.parentElement.id;
     image.push(items[id]);
+    optionsPS.galleryUID = Navigation.currentCategory;
     gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, image, optionsPS);
     gallery.init();
 }
 
 function showInfo(id) {
-    /*var info = $('#work_info_' + id);
-    var pos = $('#' + id).position();
-    var h = $('#' + id).height();
-    info.css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
-    info.attr('class', 'work-info extended');*/
     var info = getWorkInfoStructure(id);
     $('#info_cont').append(info);
 }
 
 function hideInfo(id) {
-    /*var info = $('#work_info_' + id);
-    info.attr('class', 'work-info');
-    */
     $('#info_cont').empty();
 }
 
@@ -204,8 +214,10 @@ function addItem(img) {
     items[img.id] = {
         src: img.src,
         w: img.naturalWidth,
-        h: img.naturalHeight
+        h: img.naturalHeight,
+        pid: img.parentElement.parentElement.id
     };
+    console.log(items[img.id]);
 }
 
 function Loader(elm) {
@@ -234,7 +246,7 @@ function operationError(msg) {
     alert(msg);
 }
 
-function showPage(id, direction) {
+function showPage(id, direction, catId) {
     hidePages(id, direction);
     if (id == 'frame') {
         $('#' + id).css('display','block');
@@ -245,6 +257,12 @@ function showPage(id, direction) {
             $('#' + id).attr('class', 'page expand-middle');
         }
     }
+    if (catId) {
+        setCurrentPage('li_page_cat_' + catId);
+    } else {
+        setCurrentPage('li_' + id);
+    }
+    Navigation.currentCategory = catId;
 }
 
 function hidePages(id, direction) {
@@ -256,4 +274,52 @@ function hidePages(id, direction) {
     if (id != 'frame') {
         $('#frame').css('display','none');
     }
+}
+
+function setCurrentPage(id) {
+    $('.main-nav ul li').css('font-weight', '400');
+    $('#' + id).css('font-weight', '800');
+}
+
+function parseUrlParameters() {
+    var parameters = [];
+    var key = null;
+    var value = null;
+    var strKey = '';
+    var strValue = '';
+    var ls = location.href;
+    var start = ls.indexOf('#&') + 2;
+    for (var i = start; i < ls.length; i++) {
+        var char = ls[i];
+        console.log(char);
+        if (char != '#') {
+            if (key == null) {
+                if (char != '=') {
+                    strKey += char;
+                } else {
+                    key = strKey;
+                }
+            } else if (value == null) {
+                if (char != '&') {
+                    strValue += char;
+                } else {
+                    value = strValue;
+                    parameters[key] = value;
+                    key = null;
+                    value = null;
+                    strKey = '';
+                    strValue = '';
+                }
+            }
+        }
+    }
+    if (key != null) {
+        value = strValue;
+        parameters[key] = value;
+        key = null;
+        value = null;
+        strKey = '';
+        strValue = '';
+    }
+    return parameters;
 }
