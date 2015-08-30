@@ -1,0 +1,26 @@
+body {
+    background-color: whitesmoke;
+}
+.work {
+    padding: 10px 0px;
+}
+#btn_back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: rgba(225,225,225,0.5);
+    padding: 10px 0px;
+}
+h1 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin: 10px 0px;
+}

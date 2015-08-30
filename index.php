@@ -3,9 +3,9 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <title>Viruta VC</title>
-	   <link rel="icon" href="favicon.png" sizes="16x16" type="image/png" />
-        <!--link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'-->
+        <title>Viruta vc</title>
+        <link rel="icon" href="favicon.png" sizes="16x16" type="image/png" />
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/reset.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/photoswipe.css"> 
@@ -17,15 +17,15 @@
         <script src="js/photoswipe/photoswipe-ui-default.min.js"></script> 
         <script src="js/main.js"></script>
 
-        <meta property="og:title" content="Trabajos" />
+        <!--meta property="og:title" content="Trabajos" />
         <meta property="og:site_name" content="Viruta VC"/>
-        <meta property="og:url" content="http://virutavc.com"/>
+        <meta property="og:url" content="http://virutavc.com/index.php"/>
         <meta property="og:image" content="http://virutavc.com/img/icon.png"/>
         <meta property="og:description" content="Los Maravillosos trabajos de Valentín Cacault"/>
         <meta property="og:type" content="article" />
         <meta property="og:locale" content="es_AR"/>
         <meta property="article:author" content="https://www.facebook.com/virutavc" />
-        <meta property="article:publisher" content="https://www.facebook.com/virutavc" />
+        <meta property="article:publisher" content="https://www.facebook.com/virutavc" /-->
 
     </head>
     <?php
@@ -53,7 +53,7 @@
                     <ul>
                         <li id="li_page_menu"><a href="javascript:void(0)" onclick="showPage('page_menu', 'left');">Menu</a></li>
                         <?php
-                        $menuCategories = queryDB('SELECT * FROM categories WHERE active = true', true, $dbhost, $dbuser, $dbpswd, $dbname);
+                        $menuCategories = queryDB('SELECT * FROM categories WHERE active = true');
                         if ($menuCategories) {
                             foreach ($menuCategories as $key => $row) {
                                 echo '<li id="li_page_cat_' . $row['id'] . '"><a id="btn_get_works_' . $row['id'] .  '" href="javascript:void(0)" onclick="getWorks(' . $row['id'] . ');">' . $row['name'] . '</a></li>';

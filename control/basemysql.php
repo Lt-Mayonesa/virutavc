@@ -7,7 +7,8 @@ require ('config' . DIRECTORY_SEPARATOR . 'config.php');
  * @param boolean $response true if query returns data (i.e: SELECT), or false if it doesn't (i.e: INSERT)
  * @return sql result or boolean
  */
-function queryDB($query, $response, $dbhost, $dbuser, $dbpswd, $dbname) {
+function queryDB($query, $response = true) {
+    global $dbhost, $dbuser, $dbpswd, $dbname;
     $data = [];
     $conn = new mysqli($dbhost, $dbuser, $dbpswd, $dbname);
     if ($conn->connect_error) {

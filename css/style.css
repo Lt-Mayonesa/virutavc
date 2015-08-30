@@ -296,9 +296,11 @@ body {
     margin: 10px 0px;
 }
 
-form {
-    width: 60%;
+
+.contact-form {
+    width: 500px;
     margin: 0 auto;
+    margin-top: 20px;
 }
 form label {
     font-size: 16px;
@@ -520,4 +522,23 @@ form option {
     font-size: 11px;
     border-left: 1px dotted tomato;
     background-color: white;
+}
+
+.column {
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.column.column-20 {
+    width: 20%;
+}
+.column.column-80 {
+    width: 80%;
+}
+.column.column-left {
+    float: left;
+}
+.column.column-right {
+    float: right;
 }

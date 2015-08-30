@@ -57,7 +57,7 @@
                 <select name="work_category" required>
                     <option value="" disabled selected>Seleccionar</option>
                     <?php
-                    $optionsCategories = queryDB('SELECT * FROM categories', true, $dbhost, $dbuser, $dbpswd, $dbname);
+                    $optionsCategories = queryDB('SELECT * FROM categories');
                     if ($optionsCategories) {
                         foreach ($optionsCategories as $key => $row) {
                             echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
@@ -68,7 +68,7 @@
                 <label>Album:</label>
                 <select name="work_album" required>
                     <?php
-                    $optionsAlbums = queryDB('SELECT * FROM albums', true, $dbhost, $dbuser, $dbpswd, $dbname);
+                    $optionsAlbums = queryDB('SELECT * FROM albums');
                     if ($optionsAlbums) {
                         foreach ($optionsAlbums as $key => $row) {
                             echo '<option value="' . $row['id'] . '">' . $row['title'] . '</option>';
@@ -79,24 +79,6 @@
                 <label></label>
                 <input type="submit" value="Guardar"/>
             </form>
-            <!--            <form id="update_work" method="POST" action="updatework.php">
-                            <select name="work_id" required onchange="$('#delete_file').val(this.children[this.selectedIndex].dataset.src);
-                                    loadImg('../uploaded/' + this.children[this.selectedIndex].dataset.src, 'delete_img');
-                                    loader.show();">
-                                <option value="" disabled selected>seleccionar...</option>
-            
-            $optionsWorks = queryDB('SELECT * FROM works', true, $dbhost, $dbuser, $dbpswd, $dbname);
-            if ($optionsWorks) {
-                foreach ($optionsWorks as $key => $value) {
-                    echo '<option value="' . $value['id'] . '" data-src="' . $value['url'] . '">' . $value['title'] . '</option>';
-                }
-            } else {
-                echo 'no result';
-            }
-            
-                            </select>
-                            <input type="submit" value="Actualizar"/>
-                        </form>-->
             <form id="delete_work" method="POST" action="deletework.php">
                 <input type="submit" value="Eliminar"/>
                 <label></label>
@@ -105,7 +87,7 @@
                         loader.show();">
                     <option value="" disabled selected>seleccionar...</option>
                     <?php
-                    $optionsWorks = queryDB('SELECT * FROM works', true, $dbhost, $dbuser, $dbpswd, $dbname);
+                    $optionsWorks = queryDB('SELECT * FROM works');
                     if ($optionsWorks) {
                         foreach ($optionsWorks as $key => $value) {
                             echo '<option value="' . $value['id'] . '" data-src="' . $value['url'] . '">' . $value['title'] . '</option>';
@@ -129,7 +111,7 @@
                 <select name="category_id" required onchange="formSetCategoryUpdate(this.children[this.selectedIndex]);">
                     <option value="" disabled selected >seleccionar...</option>
                     <?php
-                    $optionsCategories = queryDB('SELECT * FROM categories', true, $dbhost, $dbuser, $dbpswd, $dbname);
+                    $optionsCategories = queryDB('SELECT * FROM categories');
                     if ($optionsCategories) {
                         foreach ($optionsCategories as $key => $row) {
                             echo '<option data-state="' . $row['active'] . '" value="' . $row['id'] . '">' . $row['name'] . '</option>';
@@ -156,7 +138,7 @@
                         fillDataFromUrl('../actions/getbyalbum.php?id=' + this.children[this.selectedIndex].value, 'album_works_display', 'album_works_option')">
                     <option value="" disabled selected>seleccionar...</option>
                     <?php
-                    $optionsAlbums = queryDB('SELECT * FROM albums', true, $dbhost, $dbuser, $dbpswd, $dbname);
+                    $optionsAlbums = queryDB('SELECT * FROM albums');
                     if ($optionsAlbums) {
                         foreach ($optionsAlbums as $key => $row) {
                             if ($row['id'] != 1) {
@@ -184,7 +166,7 @@
                         <label>Mover a:</label>
                         <select id="album_new_select" name="album_new">
                             <?php
-                            $optionsAlbums = queryDB('SELECT * FROM albums', true, $dbhost, $dbuser, $dbpswd, $dbname);
+                            $optionsAlbums = queryDB('SELECT * FROM albums');
                             if ($optionsAlbums) {
                                 foreach ($optionsAlbums as $key => $row) {
                                     echo '<option value="' . $row['id'] . '">' . $row['title'] . '</option>';
