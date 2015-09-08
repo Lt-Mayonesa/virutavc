@@ -205,7 +205,7 @@ $(document).ready(function () {
     getLastWorks();
     setCurrentPage('li_page_menu');
     var params = parseUrlParameters();
-    if (params.gid != null) {
+    if (params.gid != null && params.gid != '') {
         getWorks(params.gid, params.pid, params.aid);
     }
 }).ajaxStart(function () {

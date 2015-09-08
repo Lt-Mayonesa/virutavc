@@ -8,8 +8,11 @@ if ($workId) {
     $result = queryDB('SELECT * FROM works WHERE id = ' . $workId);
     $work = $result[0];
 } else {
-    //header("Location: http://virutavc.com/");
-    die('se murio, noid');
+    $work = [
+        'title' => '',
+        'description' => '...',
+        'url' => '../img/icon.png'
+    ];
 }
 ?>
 <html>
