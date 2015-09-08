@@ -24,7 +24,7 @@ if ($conn->connect_error) {
             $response['error'] = false;
             $response['items'] = $items;
         } else {
-            $response['msg'] = 'No hay trabajos en esta categoria';
+            $response['msg'] = 'No hay ultimos trabajos';
         }
     } else {
         $response['msg'] = 'MySQL error: ' . $conn->error;

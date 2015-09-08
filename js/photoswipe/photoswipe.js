@@ -3536,12 +3536,14 @@ var _historyUpdateTimeout,
 
 
 		var pid = (_currentItemIndex + 1);
-		var item = _getItemAt( _currentItemIndex );
+		var aid = 1;
+                var item = _getItemAt( _currentItemIndex );
 		if(item.hasOwnProperty('pid')) {
 			// carry forward any custom pid assigned to the item
 			pid = item.pid;
+                        aid = item.aid;
 		}
-		var newHash = _initialHash + '&'  +  'gid=' + _options.galleryUID + '&' + 'pid=' + pid;
+		var newHash = _initialHash + '&'  +  'gid=' + _options.galleryUID + '&' + 'pid=' + pid + '&aid=' + aid;
 
 		if(!_historyChanged) {
 			if(_windowLoc.hash.indexOf(newHash) === -1) {

@@ -207,7 +207,8 @@
                         type: 'POST',
                         data: data,
                         processData: false,
-                        contentType: false
+                        contentType: false,
+                        dataType: 'json'
                     }).done(function (res) {
                         if (!res.error)
                             operationSuccess();

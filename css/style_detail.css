@@ -2,7 +2,10 @@ body {
     background-color: whitesmoke;
 }
 .work {
-    padding: 10px 0px;
+    padding: 40px 0px;
+}
+.top-pusher {
+    margin-top: 5%;
 }
 #btn_back {
     position: absolute;

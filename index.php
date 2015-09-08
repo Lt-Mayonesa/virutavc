@@ -13,7 +13,7 @@
         <script src="js/jquery/jquery.js" ></script>
         <!--script src="//code.jquery.com/jquery-1.11.3.min.js"></script-->
         <script src="js/sly/sly.js" ></script>
-        <script src="js/photoswipe/photoswipe.min.js"></script>
+        <script src="js/photoswipe/photoswipe.js"></script>
         <script src="js/photoswipe/photoswipe-ui-default.min.js"></script> 
         <script src="js/main.js"></script>
 

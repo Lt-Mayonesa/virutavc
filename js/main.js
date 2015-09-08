@@ -15,7 +15,7 @@ function getWorkStructure(data, innerWork, currentImage) {
     return '<article id="' + data.id + '" class="' + workClass + '">\n\
                 <div class="work-img" onmouseout="hideInfo(' + currentImage + ')">\n\
                     <span class="vertical-center-helper"></span>\n\
-                    <img id="' + currentImage + '" onclick="showImage(this);" onload="addItem(this);" onmouseover="showInfo(this.id)" src="uploaded/' + data.url + '" alt="imagen"/>\n\
+                    <img id="' + currentImage + '" onclick="showImage(this);" onload="addItem(this, ' + data.album_id + ');" onmouseover="showInfo(this.id)" src="uploaded/' + data.url + '" alt="imagen"/>\n\
                 </div>\n\
             </article>';
 }
@@ -34,8 +34,10 @@ function getWorkInfoStructure(imgIndex) {
             <p class="info-footer">' + info.created + '</p>\n\
         </div>';
 }
-function getWorks(id, work) {
+function getWorks(id, work, album) {
     loader.show();
+    var currentAlbum = album || 1;
+    var albumToShow = null;
     $('#slidee').empty();
     $('#frame').css('display', 'block');
     items = [];
@@ -64,7 +66,7 @@ function getWorks(id, work) {
                             $('#album_' + item.album_id).append(getWorkStructure(item, true, i));
                         } else {
                             $('#slidee').append(
-                                    '<div class="frame h-frame">\n\
+                                    '<div id="h_frame_' + item.album_id + '" class="frame h-frame">\n\
                                         <div id="album_' + item.album_id + '" class="slidee">\n\
                                             ' + getWorkStructure(item, true, i) + '\
                                         </div>\n\
@@ -81,33 +83,41 @@ function getWorks(id, work) {
                 }
                 var pos = $('#' + i).position();
                 var h = $('#' + i).height();
-                $('#work_info_' + i).css({'top' : pos.top + 'px', 'left' : pos.left + 'px', 'height' : h + 'px'});
+                $('#work_info_' + i).css({'top': pos.top + 'px', 'left': pos.left + 'px', 'height': h + 'px'});
                 lastAlbum = item.album_id;
                 addedAlbums.push(item.album_id);
                 WORKS_INFO[i] = {
-                    'title' : item.title,
-                    'description' : item.description,
-                    'created' : item.created,
+                    'title': item.title,
+                    'description': item.description,
+                    'created': item.created
                 };
             }
         } else {
             $('#slidee').append('<p class="alert no-works">Todavia no hay trabajos!</p>');
         }
         hFrames = $('.h-frame');
-        setTimeout(function () {
-            for (var i = 0; i < hFrames.length; i++) {
-                optionsHorizontal.prev = '#album_btn_prev_' + hFramesIds[i];
-                optionsHorizontal.next = '#album_btn_next_' + hFramesIds[i];
-                frame = new Sly(hFrames[i], optionsHorizontal).init();
-                FRAMES.push(frame);
+        //setTimeout(function () {
+        for (var i = 0; i < hFrames.length; i++) {
+            optionsHorizontal.prev = '#album_btn_prev_' + hFramesIds[i];
+            optionsHorizontal.next = '#album_btn_next_' + hFramesIds[i];
+            frame = new Sly(hFrames[i], optionsHorizontal).init();
+            FRAMES.push(frame);
+            if (currentAlbum != 1 && currentAlbum == hFramesIds[i]) {
+                albumToShow = frame;
             }
-            loader.hide();
-        }, 1000);
+        }
+        loader.hide();
+        //}, 1000);
         frame = new Sly('#frame', options).init();
         FRAMES.push(frame);
         showPage('frame', 'left', id);
         if (work != null) {
-            frame.toCenter($('#' + work));
+            if (albumToShow == null) {
+                frame.toCenter($('#' + work));
+            } else {
+                frame.toCenter($('#h_frame_' + currentAlbum));
+                albumToShow.toCenter($('#' + work));
+            }
         }
     }, 'json');
 }
@@ -164,14 +174,28 @@ var CURRENT_PAGE = 0;
 var Navigation = {
     currentPage: 0,
     currentCategory: null,
-    currentImage: null
+    currentImage: null,
+    imageId: null,
+    currentAlbum: null
 };
 var optionsPS = {
     index: 0,
     closeOnScroll: false,
     bgOpacity: 0.9,
     history: true,
-    galleryPIDs: true
+    galleryPIDs: true,
+    shareButtons: [
+        {id: 'facebook', label: 'Share on Facebook', url: 'https://www.facebook.com/sharer/sharer.php?u={{url}}'},
+        {id: 'twitter', label: 'Tweet', url: 'https://twitter.com/intent/tweet?text={{text}}&url={{url}}'},
+        {id: 'pinterest', label: 'Pin it', url: 'http://www.pinterest.com/pin/create/button/' + '?url={{url}}&media={{image_url}}&description={{text}}'},
+        {id: 'download', label: 'Download image', url: '{{raw_image_url}}', download: true}
+    ],
+    getPageURLForShare: function () {
+        return 'http://virutavc.com/detail?id=' + Navigation.currentImage;
+    },
+    getTextForShare: function () {
+        return 'Viruta vc | ' + WORKS_INFO[Navigation.imageId].title;
+    }
 };
 var gallery;
 
@@ -181,9 +205,8 @@ $(document).ready(function () {
     getLastWorks();
     setCurrentPage('li_page_menu');
     var params = parseUrlParameters();
-    console.log(params, params.c);
     if (params.gid != null) {
-        getWorks(params.gid, params.pid);
+        getWorks(params.gid, params.pid, params.aid);
     }
 }).ajaxStart(function () {
     loader.show();
@@ -195,6 +218,8 @@ function showImage(el) {
     var id = el.id;
     var image = [];
     Navigation.currentImage = el.parentElement.parentElement.id;
+    Navigation.imageId = id;
+    Navigation.currentAlbum = items[id].aid;
     image.push(items[id]);
     optionsPS.galleryUID = Navigation.currentCategory;
     gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, image, optionsPS);
@@ -210,14 +235,14 @@ function hideInfo(id) {
     $('#info_cont').empty();
 }
 
-function addItem(img) {
+function addItem(img, aid) {
     items[img.id] = {
         src: img.src,
         w: img.naturalWidth,
         h: img.naturalHeight,
-        pid: img.parentElement.parentElement.id
+        pid: img.parentElement.parentElement.id,
+        aid: aid
     };
-    console.log(items[img.id]);
 }
 
 function Loader(elm) {
@@ -249,7 +274,7 @@ function operationError(msg) {
 function showPage(id, direction, catId) {
     hidePages(id, direction);
     if (id == 'frame') {
-        $('#' + id).css('display','block');
+        $('#' + id).css('display', 'block');
     } else {
         if (direction) {
             $('#' + id).attr('class', 'page expand-' + direction);
@@ -272,7 +297,7 @@ function hidePages(id, direction) {
         $('.page').attr('class', 'page shrink-middle');
     }
     if (id != 'frame') {
-        $('#frame').css('display','none');
+        $('#frame').css('display', 'none');
     }
 }
 
@@ -291,7 +316,6 @@ function parseUrlParameters() {
     var start = ls.indexOf('#&') + 2;
     for (var i = start; i < ls.length; i++) {
         var char = ls[i];
-        console.log(char);
         if (char != '#') {
             if (key == null) {
                 if (char != '=') {
